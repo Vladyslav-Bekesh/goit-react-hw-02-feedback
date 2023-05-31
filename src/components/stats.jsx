@@ -1,16 +1,13 @@
 import PropTypes from 'prop-types';
 
-export function Stats({ good, neutral, bad }) {
-  const total = good + neutral + bad;
-  const positiveFeedback = ((good / total) * 100).toFixed(0);
-
+export default function Stats({ good, neutral, bad, total, countPositiveFeedback }) {
   return (
     <>
       <p>good: {good}</p>
       <p>neutral: {neutral}</p>
       <p>bad: {bad}</p>
-      <p>total: {good + neutral + bad}</p>
-      <p>positive feedback: {positiveFeedback}%</p>
+      <p>total: {total}</p>
+      <p>positive feedback: {countPositiveFeedback}%</p>
     </>
   );
 }

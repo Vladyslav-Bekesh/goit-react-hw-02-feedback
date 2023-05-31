@@ -1,6 +1,9 @@
 import { Component } from 'react';
 
-import { Stats } from './stats';
+import Stats from './Stats';
+import FeedbackOptions from './FeedbackOptions';
+import SectionTitle from './SectionTitle';
+import Notification from './Notification';
 
 export class App extends Component {
   state = {
@@ -8,7 +11,7 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-
+  // Object.keys(object1)
   increaseFeedback = ({ target }) => {
     const { buttonType } = target.dataset;
     this.setState(prevState => ({
@@ -16,40 +19,42 @@ export class App extends Component {
     }));
   };
 
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
+
+  countPositiveFeedback = () => {
+    return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(0);
+  };
+
   render() {
     const { good, neutral, bad } = this.state;
 
     return (
       <>
-        <form>
-          <h2>Please leave feedback</h2>
+        <SectionTitle title="Please leave feeback">
+          <form>
+            <FeedbackOptions
+              options={Object.keys(this.state)}
+              increaseFeedback={this.increaseFeedback}
+            ></FeedbackOptions>
+          </form>
+        </SectionTitle>
 
-          <button
-            type="button"
-            data-button-type="good"
-            onClick={event => this.increaseFeedback(event)}
-          >
-            good
-          </button>
-
-          <button
-            type="button"
-            data-button-type="neutral"
-            onClick={event => this.increaseFeedback(event)}
-          >
-            neutral
-          </button>
-
-          <button
-            type="button"
-            data-button-type="bad"
-            onClick={event => this.increaseFeedback(event)}
-          >
-            bad
-          </button>
-        </form>
-
-        <Stats good={good} neutral={neutral} bad={bad}></Stats>
+        {good !== 0 || neutral !== 0 || bad !== 0 ? (
+          <SectionTitle title="Statistic">
+            <Stats
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              countPositiveFeedback={this.countPositiveFeedback()}
+            ></Stats>
+          </SectionTitle>
+        ) : (
+          <Notification message="There is no feedback"></Notification>
+        )}
       </>
     );
   }
