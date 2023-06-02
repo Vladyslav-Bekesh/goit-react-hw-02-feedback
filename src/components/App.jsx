@@ -1,9 +1,9 @@
 import { Component } from 'react';
 
-import Stats from './/Stats';
-import FeedbackOptions from './/FeedbackOptions';
-import SectionTitle from './/SectionTitle';
-import Notification from './/Notification';
+import Stats from '../components/Stats.jsx';
+import FeedbackOptions from './FeedbackOptions';
+import SectionTitle from './SectionTitle';
+import Notification from './Notification';
 
 export class App extends Component {
   state = {
@@ -52,7 +52,7 @@ export class App extends Component {
               countPositiveFeedback={this.countPositiveFeedback()}
             ></Stats>
           </SectionTitle>
-
+          
         ) : (
           <Notification message="There is no feedback"></Notification>
         )}
