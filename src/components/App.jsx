@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import Stats from '../components/Stats.jsx';
+import Stats from './Stats.jsx';
 import FeedbackOptions from './FeedbackOptions';
 import SectionTitle from './SectionTitle';
 import Notification from './Notification';
