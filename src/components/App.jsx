@@ -11,7 +11,7 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  // Object.keys(object1)
+  
   increaseFeedback = ({ target }) => {
     const { buttonType } = target.dataset;
     this.setState(prevState => ({
